@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type TTT struct{}
 
 func main() {
@@ -124,7 +126,7 @@ func main() {
 	// t := []string{"g", "h", "l"}
 	// fmt.Println("dcl : ", t)
 	//
-	// twoD := make([][]int, 3)
+	// twoD := make([][]int, 3):
 	// for i := 0; i < 3; i++ {
 	//     innerlen := i + 1
 	//     twoD[i] = make([]int, innerlen)
@@ -134,4 +136,111 @@ func main() {
 	// }
 	//
 	// fmt.Println("2d : ", twoD)
+
+	// m := make(map[string]int)
+	// m["k1"] = 7
+	// m["k2"] = 8
+	//
+	// fmt.Println("map : ", m)
+	//
+	// v1 := m["k1"]
+	// fmt.Println("v1 : ", v1)
+	// fmt.Println("len : ", len(m))
+	//
+	// delete(m, "k2")
+	// fmt.Println("map : ", m)
+	//
+	// ff, prs := m["k2"]
+	// fmt.Println("prs : ", ff, prs)
+	//
+	// n := map[string]int{"foo": 1, "bar": 2}
+	// fmt.Println("map : ", n)
+
+	// nums := []int{2, 3, 4}
+	// sum := 0
+	// for i, num := range nums {
+	//     sum += num
+	//     fmt.Println("index : ", i, " num : ", num)
+	// }
+	//
+	// kvs := map[string]string{"a": "apple", "b": "banana"}
+	// for k, v := range kvs {
+	//     fmt.Printf("%s -> %s\n", k, v)
+	// }
+	//
+	// for k := range kvs {
+	//     fmt.Println("key : ", k)
+	// }
+	//
+	// for i, c := range "go" {
+	//     fmt.Println(i, c)
+	// }
+
+	res := plus(1, 2)
+	fmt.Println("res : ", res)
+	res = plusPlus(1, 2, 3)
+	fmt.Println("res : ", res)
+
+	a, b := vals()
+	fmt.Println(a)
+	fmt.Println(b)
+
+	_, c := vals()
+	fmt.Println(c)
+
+	total := sum(1, 2)
+	fmt.Println("total : ", total)
+	total = sum(1, 2, 3)
+	fmt.Println("total : ", total)
+	nums := []int{1, 2, 3, 4}
+	total = sum(nums...)
+	fmt.Println("total : ", total)
+
+	nextInt := intSeq()
+
+	fmt.Println(nextInt())
+	fmt.Println(nextInt())
+	fmt.Println(nextInt())
+
+	newInts := intSeq()
+	fmt.Println(newInts())
+
+	fmt.Println(fact(10))
+}
+
+func plus(a int, b int) int {
+	return a + b
+}
+
+func plusPlus(a, b, c int) int {
+	return a + b + c
+}
+
+func vals() (int, int) {
+	return 3, 7
+}
+
+func sum(nums ...int) int {
+	fmt.Println(nums, " ")
+	total := 0
+	for _, num := range nums {
+		total += num
+	}
+	fmt.Println(total)
+	return total
+}
+
+func intSeq() func() int {
+	i := 0
+	return func() int {
+		i++
+		return i
+	}
+}
+
+func fact(n int) int {
+	if n == 0 {
+		return 1
+	}
+	return n * fact(n-1)
 }
