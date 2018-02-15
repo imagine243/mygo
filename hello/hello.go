@@ -217,7 +217,6 @@ func main() {
 	// fmt.Println("zeroptr : ", i)
 	//
 	// fmt.Println("pointer : ", &i)
-
 }
 
 func zeroval(ival int) {
