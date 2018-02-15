@@ -176,36 +176,55 @@ func main() {
 	//     fmt.Println(i, c)
 	// }
 
-	res := plus(1, 2)
-	fmt.Println("res : ", res)
-	res = plusPlus(1, 2, 3)
-	fmt.Println("res : ", res)
+	// res := plus(1, 2)
+	// fmt.Println("res : ", res)
+	// res = plusPlus(1, 2, 3)
+	// fmt.Println("res : ", res)
+	//
+	// a, b := vals()
+	// fmt.Println(a)
+	// fmt.Println(b)
+	//
+	// _, c := vals()
+	// fmt.Println(c)
+	//
+	// total := sum(1, 2)
+	// fmt.Println("total : ", total)
+	// total = sum(1, 2, 3)
+	// fmt.Println("total : ", total)
+	// nums := []int{1, 2, 3, 4}
+	// total = sum(nums...)
+	// fmt.Println("total : ", total)
+	//
+	// nextInt := intSeq()
+	//
+	// fmt.Println(nextInt())
+	// fmt.Println(nextInt())
+	// fmt.Println(nextInt())
+	//
+	// newInts := intSeq()
+	// fmt.Println(newInts())
+	//
+	// fmt.Println(fact(10))
 
-	a, b := vals()
-	fmt.Println(a)
-	fmt.Println(b)
+	// i := 1
+	// fmt.Println("initial : ", i)
+	//
+	// zeroval(i)
+	// fmt.Println("zeroval : ", i)
+	//
+	// zeroptr(&i)
+	// fmt.Println("zeroptr : ", i)
+	//
+	// fmt.Println("pointer : ", &i)
+}
 
-	_, c := vals()
-	fmt.Println(c)
+func zeroval(ival int) {
+	ival = 0
+}
 
-	total := sum(1, 2)
-	fmt.Println("total : ", total)
-	total = sum(1, 2, 3)
-	fmt.Println("total : ", total)
-	nums := []int{1, 2, 3, 4}
-	total = sum(nums...)
-	fmt.Println("total : ", total)
-
-	nextInt := intSeq()
-
-	fmt.Println(nextInt())
-	fmt.Println(nextInt())
-	fmt.Println(nextInt())
-
-	newInts := intSeq()
-	fmt.Println(newInts())
-
-	fmt.Println(fact(10))
+func zeroptr(iptr *int) {
+	*iptr = 0
 }
 
 func plus(a int, b int) int {
