@@ -234,14 +234,15 @@ func main() {
 	// sp.age = 51
 	// fmt.Println(s.age)
 
-	r := rect{width: 10, height: 20}
+	// r := rect{width: 10, height: 20}
+	//
+	// fmt.Println("area : ", r.area())
+	// fmt.Println("perim : ", r.perim())
+	//
+	// rp := &r
+	// fmt.Println("area : ", rp.area())
+	// fmt.Println("perim : ", rp.perim())
 
-	fmt.Println("area : ", r.area())
-	fmt.Println("perim : ", r.perim())
-
-	rp := &r
-	fmt.Println("area : ", rp.area())
-	fmt.Println("perim : ", rp.perim())
 }
 
 type rect struct {
