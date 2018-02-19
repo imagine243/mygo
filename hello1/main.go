@@ -65,32 +65,62 @@ func f2(arg int) (int, error) {
 	return arg + 3, nil
 }
 
+func f(from string) {
+	for i := 0; i < 3; i++ {
+		fmt.Println(from, " : ", i)
+	}
+}
+
 func main() {
-	fmt.Println("hello world")
-	r := rect{3, 4}
-	c := circle{5}
-	measure(r)
-	measure(c)
+	// fmt.Println("hello world")
+	// r := rect{3, 4}
+	// c := circle{5}
+	// measure(r)
+	// measure(c)
+	//
+	// for _, i := range []int{7, 42} {
+	//     if r, e := f1(i); e != nil {
+	//         fmt.Println("f1 failed : ", e)
+	//     } else {
+	//         fmt.Println("f1 worked : ", r)
+	//     }
+	// }
+	//
+	// for _, i := range []int{7, 42} {
+	//     if r, e := f2(i); e != nil {
+	//         fmt.Println("f2 failed : ", e)
+	//     } else {
+	//         fmt.Println("f2 worked : ", r)
+	//     }
+	// }
+	//
+	// _, e := f2(42)
+	// if ae, ok := e.(*argError); ok {
+	//     fmt.Println(ae.arg)
+	//     fmt.Println(ae.prob)
+	// }
 
-	for _, i := range []int{7, 42} {
-		if r, e := f1(i); e != nil {
-			fmt.Println("f1 failed : ", e)
-		} else {
-			fmt.Println("f1 worked : ", r)
-		}
-	}
+	// f("direct")
+	// go f("goroutine")
+	// go func(msg string) {
+	//     fmt.Println(msg)
+	// }("going")
+	//
+	// fmt.Scanln()
+	// fmt.Println("done")
 
-	for _, i := range []int{7, 42} {
-		if r, e := f2(i); e != nil {
-			fmt.Println("f2 failed : ", e)
-		} else {
-			fmt.Println("f2 worked : ", r)
-		}
-	}
+	// messages := make(chan string)
+	// go func() {
+	//     messages <- "ping"
+	// }()
+	//
+	// msg := <-messages
+	// fmt.Println(msg)
 
-	_, e := f2(42)
-	if ae, ok := e.(*argError); ok {
-		fmt.Println(ae.arg)
-		fmt.Println(ae.prob)
-	}
+	// messages := make(chan string, 2)
+	// messages <- "ping"
+	// messages <- "ping"
+	//
+	// fmt.Println(<-messages)
+	// fmt.Println(<-messages)
 }
