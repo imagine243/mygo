@@ -183,6 +183,76 @@ func main() {
 	// case <-time.After(3 * time.Second):
 	//     fmt.Println("timeout 2")
 	// }
+
+	// messages := make(chan string)
+	// signals := make(chan bool)
+	//
+	// select {
+	// case msg := <-messages:
+	//     fmt.Println("received msg : ", msg)
+	// default:
+	//     fmt.Println("no msg received")
+	// }
+	//
+	// msg := "hi"
+	// select {
+	// case messages <- msg:
+	//     fmt.Println("send msg : ", msg)
+	// default:
+	//     fmt.Println("no msg send")
+	// }
+	//
+	// go func() {
+	//     messages <- "hi"
+	// }()
+	//
+	// for {
+	//     select {
+	//     case msg := <-messages:
+	//         fmt.Println("received msg : ", msg)
+	//     case sig := <-signals:
+	//         fmt.Println("received sig : ", sig)
+	//     default:
+	//         fmt.Println("no msg received")
+	//
+	//     }
+	// }
+
+	// jobs := make(chan int, 5)
+	// done := make(chan bool, 1)
+	//
+	// go func() {
+	//     for {
+	//         j, more := <-jobs
+	//         if more {
+	//             fmt.Println("received job : ", j)
+	//         } else {
+	//             fmt.Println("received all job")
+	//             done <- true
+	//             return
+	//         }
+	//     }
+	// }()
+	//
+	// for i := 0; i < 3; i++ {
+	//     jobs <- i
+	//     fmt.Println("send job : ", i)
+	// }
+	//
+	// close(jobs)
+	// fmt.Println("close jobs")
+	//
+	// <-done
+
+	// queue := make(chan string, 2)
+	//
+	// queue <- "one"
+	// queue <- "two"
+	// close(queue)
+	//
+	// for elem := range queue {
+	//     fmt.Println("item : ", elem)
+	// }
 }
 
 func ping(pings chan<- string, msg string) {
