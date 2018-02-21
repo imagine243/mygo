@@ -33,20 +33,72 @@ func main() {
 	// ticker.Stop()
 	// fmt.Println("ticker stop")
 
-	jobs := make(chan int, 100)
-	results := make(chan int, 100)
+	// jobs := make(chan int, 100)
+	// results := make(chan int, 100)
+	//
+	// for w := 1; w <= 3; w++ {
+	//     go worker(w, jobs, results)
+	// }
+	//
+	// for j := 1; j <= 5; j++ {
+	//     jobs <- j
+	// }
+	// close(jobs)
+	//
+	// for a := 1; a <= 5; a++ {
+	//     fmt.Println("results : ", <-results)
+	// }
 
-	for w := 1; w <= 3; w++ {
-		go worker(w, jobs, results)
+	// request := make(chan int, 5)
+	// for i := 0; i < 5; i++ {
+	//     request <- i
+	// }
+	// close(request)
+	// limiter := time.Tick(200 * time.Millisecond)
+	//
+	// for req := range request {
+	//     <-limiter
+	//     fmt.Println("request ; ", req, time.Now())
+	// }
+
+	burstyLimiter := make(chan time.Time, 3)
+	go func() {
+		for i := 0; i < 3; i++ {
+			burstyLimiter <- time.Now()
+		}
+		for t := range time.Tick(2000 * time.Millisecond) {
+			burstyLimiter <- t
+		}
+	}()
+
+	burstyRequests := make(chan int, 5)
+	for i := 0; i < 5; i++ {
+		burstyRequests <- i
 	}
+	// close(burstyRequests)
 
-	for j := 1; j <= 5; j++ {
-		jobs <- j
-	}
-	close(jobs)
+	go func() {
+		for i := 5; i < 15; i++ {
+			burstyRequests <- i
+			time.Sleep(100 * time.Millisecond)
+			fmt.Println("write request : ", i, time.Now())
+		}
+	}()
 
-	for a := 1; a <= 5; a++ {
-		fmt.Println("results : ", <-results)
+	// for req := range burstyRequests {
+	//     <-burstyLimiter
+	//     fmt.Println("request : ", req, time.Now())
+	// }
+
+	for {
+		<-burstyLimiter
+		select {
+		case req := <-burstyRequests:
+			fmt.Println("request : ", req, time.Now())
+		default:
+			fmt.Println("request over")
+			return
+		}
 	}
 }
 
