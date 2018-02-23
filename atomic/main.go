@@ -2,23 +2,70 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
+	"sync"
 	"sync/atomic"
 	"time"
 )
 
 func main() {
-	var ops uint64
+	// var ops uint64
+	//
+	// for i := 0; i < 50; i++ {
+	//     go func() {
+	//         for {
+	//             atomic.AddUint64(&ops, 1)
+	//             time.Sleep(time.Millisecond)
+	//         }
+	//     }()
+	// }
+	//
+	// time.Sleep(1 * time.Second)
+	// opsFinal := atomic.LoadUint64(&opsj
+	// fmt.Println("ops : ", opsFinal)
 
-	for i := 0; i < 50; i++ {
+	var state = make(map[int]int)
+	var mutex = &sync.Mutex{}
+
+	var readOps uint64
+	var writeOps uint64
+
+	for r := 0; r < 100; r++ {
 		go func() {
+			total := 0
 			for {
-				atomic.AddUint64(&ops, 1)
+				key := rand.Intn(5)
+				mutex.Lock()
+				total += state[key]
+				mutex.Unlock()
+				atomic.AddUint64(&readOps, 1)
 				time.Sleep(time.Millisecond)
 			}
 		}()
 	}
 
-	time.Sleep(10 * time.Second)
-	opsFinal := atomic.LoadUint64(&ops)
-	fmt.Println("ops : ", opsFinal)
+	for w := 0; w < 10; w++ {
+		go func() {
+			for {
+				key := rand.Intn(5)
+				val := rand.Intn(100)
+				mutex.Lock()
+				state[key] = val
+				mutex.Unlock()
+				atomic.AddUint64(&writeOps, 1)
+				time.Sleep(time.Millisecond)
+			}
+		}()
+	}
+
+	time.Sleep(time.Second)
+
+	readOpsFinal := atomic.LoadUint64(&readOps)
+	fmt.Println("readOps : ", readOpsFinal)
+	writeOpsFinal := atomic.LoadUint64(&writeOps)
+	fmt.Println("writeOps : ", writeOpsFinal)
+
+	mutex.Lock()
+	fmt.Println("state :", state)
+	mutex.Unlock()
 }
