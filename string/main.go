@@ -1,7 +1,9 @@
 package main
 
-import s "strings"
-import "fmt"
+import (
+	"fmt"
+	s "strings"
+)
 
 var p = fmt.Println
 
