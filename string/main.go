@@ -23,4 +23,5 @@ func main() {
 	p()
 	p("len", len("hello"))
 	p("char", "hello"[3])
+
 }
