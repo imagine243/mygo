@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"net"
 	"os"
 )
@@ -25,11 +24,15 @@ func main() {
 	fmt.Println("tcpAddr : ", tcpAddr.String())
 	checkError(err)
 	conn, err := net.DialTCP("tcp", nil, tcpAddr)
+	fmt.Println("connect succeed")
 	checkError(err)
 	_, err = conn.Write([]byte("HEAD / HTTP/1.0\r\n\r\n"))
+	fmt.Println("write succeed")
 	checkError(err)
-	result, err := ioutil.ReadAll(conn)
-	checkError(err)
-	fmt.Println(string(result))
+	defer conn.Close()
+	// result, err := ioutil.ReadAll(conn)
+	// fmt.Println("read succeed")
+	// checkError(err)
+	// fmt.Println(string(result))
 	os.Exit(0)
 }

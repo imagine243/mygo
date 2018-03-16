@@ -1,9 +1,11 @@
 package main
 
-import "fmt"
-import "net"
-import "os"
-import "time"
+import (
+	"fmt"
+	"io/ioutil"
+	"net"
+	"os"
+)
 
 func checkError(err error) {
 	if err != nil {
@@ -41,8 +43,11 @@ func main() {
 		}
 
 		fmt.Println("conn write")
-		daytime := time.Now().String()
-		conn.Write([]byte(daytime))
+		// daytime := time.Now().String()
+		// conn.Write([]byte(daytime))
+		result, err := ioutil.ReadAll(conn)
+		checkError(err)
+		fmt.Println(string(result))
 		conn.Close()
 	}
 
